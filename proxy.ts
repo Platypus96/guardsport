@@ -27,20 +27,18 @@ export async function proxy(request: NextRequest) {
         },
       }
     )
-
-    const { data: { session } } = await supabase.auth.getSession()
-
+    const { data: { user } } = await supabase.auth.getUser()
     const isDashboard =
       request.nextUrl.pathname.startsWith('/dashboard') ||
       request.nextUrl.pathname.startsWith('/assets') ||
       request.nextUrl.pathname.startsWith('/violations') ||
       request.nextUrl.pathname.startsWith('/settings')
 
-    if (!session && isDashboard) {
+    if (!user && isDashboard) {
       return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    if (session && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
+    if (user && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   } catch (error) {
