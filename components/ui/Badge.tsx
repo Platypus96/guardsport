@@ -1,4 +1,4 @@
-type BadgeColor = 'new' | 'reviewed' | 'ignored' | 'indigo' | 'green'
+type BadgeColor = 'new' | 'reviewed' | 'ignored' | 'indigo' | 'green' | 'blue'
 
 interface BadgeProps {
   color?: BadgeColor
@@ -12,6 +12,7 @@ const colorStyles: Record<BadgeColor, string> = {
   ignored: 'bg-slate-500/15 text-slate-400 border-slate-500/30',
   indigo: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30',
   green: 'bg-green-500/15 text-green-400 border-green-500/30',
+  blue: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
 }
 
 export function Badge({ color = 'indigo', children, className = '' }: BadgeProps) {

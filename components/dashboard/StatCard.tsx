@@ -2,13 +2,14 @@ interface StatCardProps {
   label: string
   value: number | string
   icon: React.ReactNode
-  color?: 'indigo' | 'red' | 'green'
+  color?: 'indigo' | 'red' | 'green' | 'blue'
 }
 
 const colorMap = {
   indigo: 'bg-indigo-500/15 text-indigo-400',
   red: 'bg-red-500/15 text-red-400',
   green: 'bg-green-500/15 text-green-400',
+  blue: 'bg-blue-500/15 text-blue-400',
 }
 
 export function StatCard({ label, value, icon, color = 'indigo' }: StatCardProps) {

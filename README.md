@@ -37,6 +37,19 @@ This repository currently contains the **Complete MVP (Phases 1-4)** of the proj
 - Implemented a User Profile & Settings management view (`/settings`).
 - Integrated final UI/UX polish across the application for production readiness.
 
+### ✅ Phase 5: The Real Prototype
+- **Real Web Scanning:** Replaced the simulated scanner with the live Serper.dev API to find real pirated URLs via Google Search.
+- **Automated Email Alerts:** Integrated Resend to automatically email users when a scan finds copyright violations.
+- **Pricing & Subscription:** Added a Pricing page showcasing a 10-asset Free tier and a $99/mo Pro tier.
+- **Blockchain Simulation:** Added a "Proof of Ownership" feature that generates an immutable cryptographic SHA-256 hash of an asset to prove ownership.
+
+### ✅ Phase 6: The Intelligence Engine & Legal Action
+- **3-Layer Intelligence Pipeline:** Scanning now utilizes a Smart Query Generator, an Open Graph (OG) web scraper to verify video content, and a Fuzzy Matching algorithm to assign a "Confidence Score" to every potential violation.
+- **Asset Threat Levels:** Implemented a dynamic 0-100 Threat Score for every asset based on the volume, recency, spread, and confidence of violations.
+- **DMCA Email Composer:** A full UI workflow for users to review violations, auto-generate customized legal DMCA takedown notices, and send them directly via Resend.
+- **Evidence Audit & Export:** Implemented a strict database audit trail for every violation event, and added a feature to instantly generate and download professional HTML/PDF Evidence Reports for legal use.
+- **Platform Analytics:** Added a dynamic pie chart to the dashboard detailing which social/web platforms are hosting the most pirated versions of the user's content.
+
 ## Getting Started
 
 1. Clone the repository
