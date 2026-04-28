@@ -33,7 +33,8 @@ export async function proxy(request: NextRequest) {
     const isDashboard =
       request.nextUrl.pathname.startsWith('/dashboard') ||
       request.nextUrl.pathname.startsWith('/assets') ||
-      request.nextUrl.pathname.startsWith('/violations')
+      request.nextUrl.pathname.startsWith('/violations') ||
+      request.nextUrl.pathname.startsWith('/settings')
 
     if (!session && isDashboard) {
       return NextResponse.redirect(new URL('/login', request.url))
