@@ -12,12 +12,17 @@ const COLORS = {
   'Other Web': '#8b5cf6'// Purple
 }
 
+import { PieChart as PieChartIcon } from 'lucide-react'
+
 export function PlatformChart({ data }: { data: { name: string, value: number }[] }) {
   if (!data || data.length === 0) {
     return (
-      <div className="h-64 flex flex-col items-center justify-center text-slate-500">
-        <svg className="w-8 h-8 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
-        <p>No platform data available yet.</p>
+      <div className="h-64 flex flex-col items-center justify-center text-slate-500 bg-slate-900/20 rounded-xl border border-dashed border-slate-700/50">
+        <div className="w-12 h-12 rounded-full bg-slate-800/50 flex items-center justify-center mb-3">
+          <PieChartIcon className="w-6 h-6 text-slate-600" />
+        </div>
+        <p className="text-sm font-medium">No platform data</p>
+        <p className="text-xs text-slate-600 mt-1">Awaiting detection results.</p>
       </div>
     )
   }

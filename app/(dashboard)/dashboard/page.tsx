@@ -2,11 +2,11 @@ import { createClient } from '@/lib/supabase/server'
 import { StatCard } from '@/components/dashboard/StatCard'
 import { ViolationsChart } from '@/components/dashboard/ViolationsChart'
 import { PlatformChart } from '@/components/dashboard/PlatformChart'
-import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
 import { calculateAssetThreatLevel, getThreatLevelColor, getThreatLevelBg, getThreatLevelLabel } from '@/lib/threat-score'
 import { Button } from '@/components/ui/Button'
+import { FileSearch, ShieldAlert, Zap, Activity } from 'lucide-react'
 
 function buildLast7Days(violations: { detected_at: string }[]) {
   const days: { date: string; count: number }[] = []
@@ -60,27 +60,46 @@ export default async function DashboardPage() {
   // Calculate Overall Portfolio Threat Level
   const overallThreat = calculateAssetThreatLevel(violations ?? [])
 
+  // Time-based greeting
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pb-12">
       {/* Welcome Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-slate-800/50">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'}, <span className="text-indigo-400">{user?.email?.split('@')[0] || 'User'}</span> 👋</h1>
-          <p className="text-slate-400 mt-2">Here's the latest intelligence on your digital assets.</p>
+          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight">
+            {greeting}, <span className="text-indigo-400">{user?.email?.split('@')[0] || 'User'}</span> 👋
+          </h1>
+          <p className="text-slate-400 mt-2 text-sm">Here's the latest intelligence on your digital assets.</p>
         </div>
         
-        {/* Portfolio Threat Level & Quick Actions */}
+        {/* Quick Actions Bar */}
         <div className="flex flex-wrap items-center gap-3">
+          <Link href="/violations">
+            <Button variant="secondary" className="bg-slate-800/50 hover:bg-slate-700/50 border-slate-700 rounded-xl font-medium text-sm">
+              <Activity className="w-4 h-4 mr-2 text-blue-400" />
+              View Reports
+            </Button>
+          </Link>
+          <Link href="/assets">
+            <Button variant="secondary" className="bg-slate-800/50 hover:bg-slate-700/50 border-slate-700 rounded-xl font-medium text-sm">
+              <FileSearch className="w-4 h-4 mr-2 text-emerald-400" />
+              Scan All
+            </Button>
+          </Link>
           <Link href="/assets/new">
-            <Button variant="primary" className="shadow-lg shadow-indigo-500/20 rounded-xl font-medium">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+            <Button variant="primary" className="shadow-lg shadow-indigo-500/20 rounded-xl font-medium text-sm">
+              <Zap className="w-4 h-4 mr-2" />
               Add Asset
             </Button>
           </Link>
-          <div className={`px-5 py-2.5 rounded-xl border flex flex-col items-center shadow-sm ${getThreatLevelBg(overallThreat)}`}>
+          
+          <div className={`ml-2 px-5 py-2 rounded-xl border flex flex-col items-center shadow-sm ${getThreatLevelBg(overallThreat)}`}>
             <span className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-0.5">Portfolio Threat</span>
             <div className={`text-xl font-black ${getThreatLevelColor(overallThreat)} leading-none`}>
-              {overallThreat}% <span className="text-sm font-semibold opacity-80 ml-1">{getThreatLevelLabel(overallThreat)}</span>
+              {overallThreat}%
             </div>
           </div>
         </div>
@@ -89,28 +108,30 @@ export default async function DashboardPage() {
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <StatCard
-          label="Assets Registered"
+          label="Assets Monitored"
           value={totalAssets}
           color="indigo"
-          icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
+          icon={<ShieldAlert className="w-5 h-5" />}
+          trend={{ value: 12, label: 'vs last week' }}
         />
         <StatCard
           label="Total Violations"
           value={totalViolations}
           color="red"
-          icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+          icon={<Activity className="w-5 h-5" />}
+          trend={{ value: 5, label: 'vs last week' }}
         />
         <StatCard
           label="Takedowns Sent"
           value={(violations ?? []).filter(v => v.status === 'takedown_sent').length}
           color="blue"
-          icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>}
+          icon={<Zap className="w-5 h-5" />}
+          trend={{ value: 24, label: 'vs last week' }}
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-2">
-          {/* Chart */}
           <Card title="Violations — Last 7 Days">
             <ViolationsChart data={chartData} />
           </Card>
@@ -122,52 +143,60 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Recent Violations */}
+      {/* Activity Feed Widget */}
       <Card
-        title="Recent Violations"
+        title="Recent Activity"
         action={
-          <Link href="/violations" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
-            View all & manage takedowns →
+          <Link href="/violations" className="text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
+            View all violations →
           </Link>
         }
       >
         {recentViolations.length === 0 ? (
-          <div className="text-center py-10">
-            <p className="text-slate-400 text-sm">No violations detected yet.</p>
+          <div className="text-center py-10 bg-slate-900/20 rounded-xl border border-dashed border-slate-700/50 mt-2">
+            <p className="text-slate-400 text-sm">No activity recorded yet.</p>
             <p className="text-slate-500 text-xs mt-1">
-              Go to <Link href="/assets" className="text-indigo-400 hover:underline">My Assets</Link> and run a scan.
+              Add assets and run a scan to populate this feed.
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-700/60">
-                  <th className="text-left py-2.5 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Confidence</th>
-                  <th className="text-left py-2.5 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Asset</th>
-                  <th className="text-left py-2.5 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Platform</th>
-                  <th className="text-left py-2.5 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentViolations.map((v: any) => (
-                  <tr key={v.id} className="border-b border-slate-700/30 hover:bg-slate-700/20 transition-colors">
-                    <td className="py-3 px-2">
-                      <span className={`font-medium ${getThreatLevelColor(v.confidence)}`}>{v.confidence}%</span>
-                    </td>
-                    <td className="py-3 px-2 text-slate-200 font-medium max-w-[160px] truncate">
-                      {v.assets?.title ?? '—'}
-                    </td>
-                    <td className="py-3 px-2">
-                      <Badge color="indigo">{v.platform}</Badge>
-                    </td>
-                    <td className="py-3 px-2">
-                      <Badge color={v.status === 'takedown_sent' ? 'blue' : v.status}>{v.status.replace('_', ' ')}</Badge>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="relative border-l border-slate-800 ml-3 mt-4 space-y-8 pb-4">
+            {recentViolations.map((v: any, index: number) => {
+              const isTakedown = v.status === 'takedown_sent';
+              const isNew = v.status === 'new';
+              
+              return (
+                <div key={v.id} className="relative pl-6 group">
+                  <span className={`absolute -left-[5px] top-1.5 w-2 h-2 rounded-full ring-4 ring-slate-900 ${isTakedown ? 'bg-blue-500' : isNew ? 'bg-red-500' : 'bg-slate-500'} group-hover:scale-125 transition-transform`}></span>
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+                    <h4 className="text-sm font-semibold text-slate-200">
+                      {isTakedown ? 'DMCA Takedown Sent' : isNew ? 'New Violation Detected' : 'Violation Reviewed'}
+                    </h4>
+                    <time className="text-xs text-slate-500 font-mono mt-1 sm:mt-0">
+                      {new Date(v.detected_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
+                    </time>
+                  </div>
+                  
+                  <div className="text-sm text-slate-400 bg-slate-900/40 border border-slate-800 rounded-lg p-3 mt-2 shadow-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-300">
+                        {v.platform}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getThreatLevelBg(v.confidence)} ${getThreatLevelColor(v.confidence)}`}>
+                        {v.confidence}% Match
+                      </span>
+                    </div>
+                    <p className="truncate text-slate-300 mb-1 font-medium">
+                      Asset: {v.assets?.title ?? 'Unknown Asset'}
+                    </p>
+                    <a href={v.found_url} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-400 hover:underline truncate block w-full">
+                      {v.found_url}
+                    </a>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         )}
       </Card>
