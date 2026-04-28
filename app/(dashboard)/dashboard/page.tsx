@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
 import { calculateAssetThreatLevel, getThreatLevelColor, getThreatLevelBg, getThreatLevelLabel } from '@/lib/threat-score'
+import { Button } from '@/components/ui/Button'
 
 function buildLast7Days(violations: { detected_at: string }[]) {
   const days: { date: string; count: number }[] = []
@@ -60,18 +61,27 @@ export default async function DashboardPage() {
   const overallThreat = calculateAssetThreatLevel(violations ?? [])
 
   return (
-    <div>
-      <div className="mb-6 flex justify-between items-center">
+    <div className="space-y-8">
+      {/* Welcome Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-          <p className="text-slate-400 text-sm mt-1">Overview of your digital asset protection status</p>
+          <h1 className="text-3xl font-bold text-white tracking-tight">Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'}, <span className="text-indigo-400">{user?.email?.split('@')[0] || 'User'}</span> 👋</h1>
+          <p className="text-slate-400 mt-2">Here's the latest intelligence on your digital assets.</p>
         </div>
         
-        {/* Portfolio Threat Level */}
-        <div className={`px-4 py-2 rounded-lg border flex flex-col items-end ${getThreatLevelBg(overallThreat)}`}>
-          <span className="text-xs uppercase tracking-wider font-bold text-slate-400">Portfolio Threat</span>
-          <div className={`text-xl font-black ${getThreatLevelColor(overallThreat)} flex items-center gap-2`}>
-            {overallThreat}% <span className="text-sm font-medium">({getThreatLevelLabel(overallThreat)})</span>
+        {/* Portfolio Threat Level & Quick Actions */}
+        <div className="flex flex-wrap items-center gap-3">
+          <Link href="/assets/new">
+            <Button variant="primary" className="shadow-lg shadow-indigo-500/20 rounded-xl font-medium">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+              Add Asset
+            </Button>
+          </Link>
+          <div className={`px-5 py-2.5 rounded-xl border flex flex-col items-center shadow-sm ${getThreatLevelBg(overallThreat)}`}>
+            <span className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-0.5">Portfolio Threat</span>
+            <div className={`text-xl font-black ${getThreatLevelColor(overallThreat)} leading-none`}>
+              {overallThreat}% <span className="text-sm font-semibold opacity-80 ml-1">{getThreatLevelLabel(overallThreat)}</span>
+            </div>
           </div>
         </div>
       </div>
