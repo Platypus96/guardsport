@@ -10,7 +10,7 @@ GuardSport is a web platform for sports video content creators to protect their 
 
 ## Current Progress
 
-This repository currently contains **Phase 1 & 2** of the project build:
+This repository currently contains **Phase 1, 2 & 3** of the project build:
 
 ### ✅ Phase 1: Project Setup & Database
 - Scaffolding Next.js with TypeScript and Tailwind CSS.
@@ -23,6 +23,14 @@ This repository currently contains **Phase 1 & 2** of the project build:
 - Route protection implementation using Next.js `proxy.ts`.
 - Building a custom, glassmorphic UI for `/login` and `/signup`.
 - End-to-end user registration and login flows functioning locally.
+
+### ✅ Phase 3: Dashboard & API Core
+- Created reusable UI components (Button, Card, Badge) aligned with the glassmorphic design.
+- Built the Dashboard layout with a responsive sidebar navigation.
+- Implemented backend API routes (`/api/assets`, `/api/violations`, `/api/scan`).
+- Developed a simulated web scanner (`lib/scanner.ts`) to detect piracy instances.
+- Built out the frontend pages: Dashboard, My Assets, Add Asset, and Violations.
+- Integrated `recharts` for data visualization.
 
 ## Getting Started
 
