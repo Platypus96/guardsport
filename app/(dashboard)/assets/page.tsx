@@ -161,7 +161,7 @@ export default function AssetsPage() {
         </div>
 
         <div className="flex items-center gap-4 mb-4">
-          <div className="relative">
+          <div className="relative shrink-0">
             <svg className="w-16 h-16 transform -rotate-90">
               <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-slate-800" />
               <circle 
@@ -174,8 +174,8 @@ export default function AssetsPage() {
               <span className={`text-lg font-black leading-none ${getThreatLevelColor(asset.threat_score)}`}>{asset.threat_score}</span>
             </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-slate-200 truncate pr-16" title={asset.title}>{asset.title}</h3>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-slate-200 truncate pr-8" title={asset.title}>{asset.title}</h3>
             <div className="flex gap-2 mt-1">
               <Badge color="indigo">{asset.sport}</Badge>
             </div>
@@ -184,6 +184,30 @@ export default function AssetsPage() {
 
         <div className="text-xs text-slate-500 mb-4 bg-slate-950/50 p-2 rounded-lg truncate" title={asset.url}>
           {asset.url}
+        </div>
+
+        {/* SHA-256 Proof Hash */}
+        <div className="mb-4">
+          {asset.proof_hash ? (
+            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-3">
+              <div className="flex items-center gap-1.5 mb-1">
+                <svg className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-400">SHA-256 Proof</span>
+              </div>
+              <p className="font-mono text-[10px] text-emerald-300/70 break-all leading-tight">{asset.proof_hash}</p>
+            </div>
+          ) : (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => handleGenerateProof(asset.id)}
+              loading={state?.proving}
+              className="w-full border border-dashed border-slate-700 hover:border-indigo-500/50 hover:bg-indigo-500/5 text-slate-400 hover:text-indigo-300 transition-all"
+            >
+              <svg className="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              Generate SHA-256 Proof
+            </Button>
+          )}
         </div>
 
         <div className="flex items-center justify-between border-t border-slate-800 pt-4 mt-auto">
@@ -327,6 +351,7 @@ export default function AssetsPage() {
                   <th className="text-left py-3 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Threat Level</th>
                   <th className="text-left py-3 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Title</th>
                   <th className="text-left py-3 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">URL</th>
+                  <th className="text-left py-3 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">SHA-256 Proof</th>
                   <th className="text-left py-3 px-2 text-xs uppercase tracking-wide text-slate-400 font-medium">Actions</th>
                 </tr>
               </thead>
@@ -357,6 +382,27 @@ export default function AssetsPage() {
                         <a href={asset.url} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline text-xs truncate max-w-[200px] block font-mono bg-slate-900/50 p-1.5 rounded">
                           {asset.url}
                         </a>
+                      </td>
+                      <td className="py-3 px-2 max-w-[200px]">
+                        {asset.proof_hash ? (
+                          <div className="group relative">
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <svg className="w-3 h-3 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                              <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-400">Verified</span>
+                            </div>
+                            <p className="font-mono text-[9px] text-slate-400 truncate" title={asset.proof_hash}>{asset.proof_hash.slice(0, 16)}…</p>
+                          </div>
+                        ) : (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleGenerateProof(asset.id)}
+                            loading={state?.proving}
+                            className="text-xs border border-dashed border-slate-700 hover:border-indigo-500/50 hover:text-indigo-300 text-slate-500 px-2 py-1 whitespace-nowrap"
+                          >
+                            + Generate Proof
+                          </Button>
+                        )}
                       </td>
                       <td className="py-3 px-2">
                         <div className="flex gap-2">
