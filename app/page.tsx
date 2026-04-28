@@ -77,6 +77,55 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+
+        {/* pHash Explanation Section */}
+        <div className="w-full mt-24 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-indigo-900/40 to-slate-900 border border-indigo-500/20 text-left">
+          <div className="flex flex-col md:flex-row gap-10 items-center">
+            <div className="flex-1 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Privacy-First Fingerprinting
+              </div>
+              <h2 className="text-3xl font-bold text-white tracking-tight">How we catch altered pirated copies.</h2>
+              <p className="text-slate-300 leading-relaxed">
+                Pirates try to hide by lowering quality, cropping edges, or changing colors. GuardSport catches them anyway using <strong>Perceptual Hashing (pHash)</strong> — the same core tech behind YouTube Content ID.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                When you upload a video, it never leaves your browser. Instead, your browser extracts frames, shrinks them to 32x32 black-and-white squares, and generates a tiny mathematical "memory" of the core shapes. When our scanner finds a suspicious video, it repeats the process. 
+                <br /><br />
+                The pirate's edits are lost in the shrinking process, but the core shapes remain identical — allowing our engine to flag it with 98% confidence.
+              </p>
+            </div>
+            <div className="w-full md:w-1/3 aspect-square rounded-2xl bg-slate-950 border border-slate-800 p-6 flex flex-col justify-center gap-4 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e51a_1px,transparent_1px),linear-gradient(to_bottom,#4f46e51a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+              
+              <div className="relative z-10 p-3 rounded-lg bg-slate-900 border border-slate-700 flex items-center gap-3">
+                <div className="w-10 h-10 rounded bg-indigo-500/20 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                </div>
+                <div className="flex-1">
+                  <div className="h-2 w-16 bg-slate-700 rounded mb-1.5"></div>
+                  <div className="h-2 w-24 bg-slate-800 rounded"></div>
+                </div>
+              </div>
+
+              <div className="relative z-10 flex justify-center">
+                <svg className="w-5 h-5 text-slate-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+              </div>
+
+              <div className="relative z-10 p-3 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center gap-3">
+                <div className="w-10 h-10 rounded bg-indigo-500 flex items-center justify-center font-mono text-xs font-bold text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                  a4f2
+                </div>
+                <div className="flex-1 font-mono text-[10px] text-indigo-300 break-all leading-tight">
+                  a4f2c89b7e31d056
+                  <br />
+                  <span className="text-slate-500">64-bit Hash</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   )
