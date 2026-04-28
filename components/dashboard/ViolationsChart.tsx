@@ -11,11 +11,17 @@ interface ViolationsChartProps {
   data: ChartData[]
 }
 
+import { BarChart3 } from 'lucide-react'
+
 export function ViolationsChart({ data }: ViolationsChartProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48 text-slate-500 text-sm">
-        No data available yet
+      <div className="flex flex-col items-center justify-center h-[220px] text-slate-500 bg-slate-900/20 rounded-xl border border-dashed border-slate-700/50">
+        <div className="w-12 h-12 rounded-full bg-slate-800/50 flex items-center justify-center mb-3">
+          <BarChart3 className="w-6 h-6 text-slate-600" />
+        </div>
+        <p className="text-sm font-medium">No violations recorded</p>
+        <p className="text-xs text-slate-600 mt-1">Data will appear here once scans complete.</p>
       </div>
     )
   }

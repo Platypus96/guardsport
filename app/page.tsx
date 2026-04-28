@@ -1,39 +1,41 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { AnimatedCounter } from '@/components/AnimatedCounter'
+import { Search, ScanEye, ShieldAlert, Zap, FileSearch, Activity, Play, Upload, ShieldCheck, CheckCircle2 } from 'lucide-react'
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col items-center selection:bg-indigo-500/30 overflow-hidden">
       {/* Dynamic Background Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
-      {/* Navbar */}
-      <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between relative z-10 backdrop-blur-sm border-b border-white/5">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
+      {/* Sticky Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center backdrop-blur-md bg-slate-950/80 border-b border-white/5 transition-all duration-300">
+        <nav className="w-full max-w-7xl px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+              <ShieldCheck className="w-4.5 h-4.5 text-white" />
+            </div>
+            <span className="font-bold text-white text-xl tracking-tight">GuardSport</span>
           </div>
-          <span className="font-bold text-white text-xl tracking-tight">GuardSport</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
-            Log in
-          </Link>
-          <Link href="/signup">
-            <Button variant="primary" size="sm" className="shadow-lg shadow-indigo-500/20">Get Started</Button>
-          </Link>
-        </div>
-      </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+              Log in
+            </Link>
+            <Link href="/signup">
+              <Button variant="primary" size="sm" className="shadow-lg shadow-indigo-500/20">Get Started</Button>
+            </Link>
+          </div>
+        </nav>
+      </div>
 
       {/* Hero Section */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-6 flex flex-col items-center relative z-10 pb-20 pt-32">
-        {/* Glow Effects */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-purple-500/20 blur-[100px] rounded-full pointer-events-none" />
+        {/* Animated Glow Effects */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-purple-500/20 blur-[100px] rounded-full pointer-events-none animate-[pulse_6s_ease-in-out_infinite_1s]" />
 
-        <div className="text-center flex flex-col items-center">
+        <div className="text-center flex flex-col items-center pt-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/50 backdrop-blur-md text-slate-300 text-sm font-medium mb-8 shadow-sm transition-all hover:bg-slate-800">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
@@ -50,13 +52,11 @@ export default function LandingPage() {
             GuardSport automates the detection of illegal streams and unauthorized uploads across the web. Secure your revenue and protect your broadcasting rights in real-time.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mb-24">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-20">
             <Link href="/signup">
               <Button variant="primary" className="h-14 px-8 text-lg font-semibold shadow-xl shadow-indigo-500/25 bg-indigo-600 hover:bg-indigo-500 transition-all rounded-xl">
                 Start Scanning Free
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <Zap className="w-5 h-5 ml-2" />
               </Button>
             </Link>
             <Link href="/login">
@@ -67,19 +67,135 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Dashboard Mockup / Stats Row */}
+        {/* Product Mockup — Inline Dashboard Preview */}
+        <div className="w-full max-w-5xl mx-auto mb-24 relative group">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10 pointer-events-none h-full w-full rounded-2xl" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-35 transition duration-1000" />
+          <div className="relative rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl shadow-indigo-500/10">
+            {/* Browser Chrome */}
+            <div className="flex items-center px-4 py-3 bg-slate-900 border-b border-slate-800 gap-3">
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                <div className="w-3 h-3 rounded-full bg-green-500/70" />
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="flex items-center gap-2 bg-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-500 font-mono w-72">
+                  <span className="text-indigo-400">🔒</span> app.guardsport.io/dashboard
+                </div>
+              </div>
+            </div>
+            {/* Dashboard Preview Body */}
+            <div className="bg-slate-950 flex">
+              {/* Sidebar */}
+              <div className="w-44 bg-slate-900 border-r border-slate-800 p-3 space-y-2 hidden sm:block">
+                <div className="px-2 py-1.5 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-indigo-500" />
+                  <div className="h-2 w-16 bg-indigo-400/60 rounded" />
+                </div>
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="px-2 py-1.5 rounded-lg flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-slate-700" />
+                    <div className="h-2 rounded bg-slate-700" style={{ width: `${48 + i * 10}px` }} />
+                  </div>
+                ))}
+              </div>
+              {/* Main Content */}
+              <div className="flex-1 p-5 space-y-4">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-2">
+                  <div className="space-y-1">
+                    <div className="h-3 w-40 bg-slate-200/10 rounded" />
+                    <div className="h-2 w-24 bg-slate-600 rounded" />
+                  </div>
+                  <div className="h-8 w-28 bg-indigo-500 rounded-xl" />
+                </div>
+                {/* Stat Cards */}
+                <div className="grid grid-cols-4 gap-3">
+                  {[
+                    { color: 'bg-indigo-500/20', w: 'w-12', label: 'bg-slate-600' },
+                    { color: 'bg-red-500/20', w: 'w-10', label: 'bg-slate-600' },
+                    { color: 'bg-emerald-500/20', w: 'w-14', label: 'bg-slate-600' },
+                    { color: 'bg-purple-500/20', w: 'w-10', label: 'bg-slate-600' },
+                  ].map((c, i) => (
+                    <div key={i} className="rounded-xl bg-slate-900 border border-slate-800 p-3 space-y-2">
+                      <div className={`h-1.5 ${c.w} ${c.color} rounded`} />
+                      <div className="h-4 w-8 bg-slate-200/20 rounded" />
+                      <div className={`h-1.5 ${c.label} rounded w-full`} />
+                    </div>
+                  ))}
+                </div>
+                {/* Chart + Table area */}
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="col-span-2 rounded-xl bg-slate-900 border border-slate-800 p-4 h-28 flex flex-col gap-3">
+                    <div className="h-2 w-20 bg-slate-700 rounded" />
+                    <div className="flex-1 flex items-end gap-1">
+                      {[40, 65, 30, 80, 55, 90, 45, 70, 35, 60].map((h, i) => (
+                        <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i === 7 ? 'rgb(99 102 241 / 0.8)' : 'rgb(99 102 241 / 0.3)' }} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col gap-2 h-28">
+                    <div className="h-2 w-16 bg-slate-700 rounded" />
+                    <div className="flex-1 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full border-4 border-indigo-500/40 border-t-indigo-500" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Animated Stats Row */}
         <div className="w-full max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-32">
           {[
-            { label: 'Violations Detected', value: '45,281+' },
-            { label: 'Takedowns Sent', value: '12,940+' },
-            { label: 'Accuracy Rate', value: '98.9%' },
-            { label: 'Platforms Monitored', value: '50+' }
+            { label: 'Violations Detected', value: 45281, suffix: '+' },
+            { label: 'Takedowns Sent', value: 12940, suffix: '+' },
+            { label: 'Accuracy Rate', value: 98, suffix: '.9%' },
+            { label: 'Platforms Monitored', value: 50, suffix: '+' }
           ].map((stat, i) => (
             <div key={i} className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-md text-center flex flex-col justify-center transition-transform hover:-translate-y-1 hover:bg-slate-800/50 duration-300">
-              <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-1">{stat.value}</div>
+              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               <div className="text-sm font-medium text-slate-400 uppercase tracking-wide">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        {/* How it Works Stepper */}
+        <div className="w-full max-w-5xl mx-auto mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">How GuardSport Works</h2>
+            <p className="text-slate-400 text-lg">Three simple steps to secure your content across the web.</p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -translate-y-1/2 z-0"></div>
+            
+            <div className="relative z-10 flex flex-col items-center bg-slate-950 p-6 rounded-2xl w-full md:w-1/3">
+              <div className="w-16 h-16 rounded-2xl bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30 mb-6 text-indigo-400">
+                <Upload className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">1. Upload Asset</h3>
+              <p className="text-slate-400 text-center text-sm">Upload your video file securely. We extract perceptual hashes locally in your browser.</p>
+            </div>
+            
+            <div className="relative z-10 flex flex-col items-center bg-slate-950 p-6 rounded-2xl w-full md:w-1/3">
+              <div className="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center border border-purple-500/30 mb-6 text-purple-400">
+                <ScanEye className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">2. Intelligent Scan</h3>
+              <p className="text-slate-400 text-center text-sm">Our AI continuously monitors social platforms and streaming sites for matching hashes.</p>
+            </div>
+            
+            <div className="relative z-10 flex flex-col items-center bg-slate-950 p-6 rounded-2xl w-full md:w-1/3">
+              <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 mb-6 text-emerald-400">
+                <ShieldAlert className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">3. Take Action</h3>
+              <p className="text-slate-400 text-center text-sm">Review flagged violations and issue 1-click DMCA takedown notices instantly.</p>
+            </div>
+          </div>
         </div>
 
         {/* Feature Grid */}
@@ -91,35 +207,33 @@ export default function LandingPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: 'Automated Discovery', desc: 'Our AI generates smart search queries to find hidden streams and re-uploads that evade simple title searches.', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z', color: 'indigo' },
-              { title: 'Perceptual Fingerprinting', desc: 'Identifies pirated videos even if they are re-encoded, cropped, or color-altered. Your video never leaves your browser.', icon: 'M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.071 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4', color: 'emerald' },
-              { title: 'Fuzzy Confidence Scoring', desc: 'Every discovered URL is scored from 0-100 based on Levenshtein distance and token overlap to eliminate false positives.', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', color: 'blue' },
-              { title: '1-Click DMCA Takedowns', desc: 'Review flagged content and instantly send auto-generated legal takedown notices via email with our integrated Resend API.', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', color: 'purple' },
-              { title: 'Court-Ready Evidence', desc: 'Generate timestamped PDF/HTML evidence reports with full audit trails of when the piracy was detected and acted upon.', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', color: 'rose' },
-              { title: 'Portfolio Threat Scoring', desc: 'Monitor your entire asset library with a dynamic 0-100 threat gauge that factors in volume, spread, and recency.', icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z', color: 'amber' }
+              { title: 'Automated Discovery', desc: 'Our AI generates smart search queries to find hidden streams and re-uploads that evade simple title searches.', icon: Search, color: 'indigo' },
+              { title: 'Perceptual Fingerprinting', desc: 'Identifies pirated videos even if they are re-encoded, cropped, or color-altered. Your video never leaves your browser.', icon: ScanEye, color: 'emerald' },
+              { title: 'Fuzzy Confidence Scoring', desc: 'Every discovered URL is scored from 0-100 based on Levenshtein distance and token overlap to eliminate false positives.', icon: Activity, color: 'blue' },
+              { title: '1-Click DMCA Takedowns', desc: 'Review flagged content and instantly send auto-generated legal takedown notices via email with our integrated Resend API.', icon: Zap, color: 'purple' },
+              { title: 'Court-Ready Evidence', desc: 'Generate timestamped PDF/HTML evidence reports with full audit trails of when the piracy was detected and acted upon.', icon: FileSearch, color: 'rose' },
+              { title: 'Portfolio Threat Scoring', desc: 'Monitor your entire asset library with a dynamic 0-100 threat gauge that factors in volume, spread, and recency.', icon: ShieldAlert, color: 'amber' }
             ].map((f, i) => (
               <div key={i} className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:bg-slate-800/60 hover:border-slate-700 transition-all duration-300">
-                <div className={`w-12 h-12 rounded-xl bg-${f.color}-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner`}>
-                  <svg className={`w-6 h-6 text-${f.color}-400`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={f.icon} />
-                  </svg>
+                <div className={`w-14 h-14 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner border border-slate-700/50 group-hover:border-${f.color}-500/50`}>
+                  <f.icon className={`w-7 h-7 text-${f.color}-400`} />
                 </div>
                 <h3 className="text-xl text-white font-bold mb-3 tracking-tight">{f.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{f.desc}</p>
+                <p className="text-slate-400 leading-relaxed text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* pHash Explanation Section */}
-        <div className="w-full max-w-6xl mx-auto p-10 md:p-14 rounded-[2rem] bg-gradient-to-br from-indigo-900/30 to-slate-900 border border-indigo-500/20 shadow-2xl shadow-indigo-900/20 text-left overflow-hidden relative">
+        <div className="w-full max-w-6xl mx-auto p-10 md:p-14 rounded-[2rem] bg-gradient-to-br from-indigo-900/30 to-slate-900 border border-indigo-500/20 shadow-2xl shadow-indigo-900/20 text-left overflow-hidden relative mb-32">
           {/* Decor */}
           <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-indigo-500/20 blur-[80px] rounded-full pointer-events-none" />
           
           <div className="flex flex-col md:flex-row gap-12 items-center relative z-10">
             <div className="flex-1 space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 shadow-sm">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <CheckCircle2 className="w-4 h-4" />
                 Privacy-First Fingerprinting
               </div>
               <h2 className="text-4xl font-extrabold text-white tracking-tight">How we catch altered pirated copies.</h2>
@@ -139,7 +253,7 @@ export default function LandingPage() {
               {/* Pirate Video Box */}
               <div className="relative z-10 p-4 rounded-xl bg-slate-900 border border-slate-700 flex items-center gap-4 transform rotate-1 hover:rotate-0 transition-transform">
                 <div className="w-12 h-12 rounded bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
-                  <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                  <Play className="w-6 h-6 text-indigo-400 fill-indigo-400/20" />
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="h-2.5 w-20 bg-slate-700 rounded"></div>
@@ -150,7 +264,7 @@ export default function LandingPage() {
               {/* Scanning Animation */}
               <div className="relative z-10 flex flex-col items-center gap-2 my-2">
                 <div className="w-px h-8 bg-gradient-to-b from-transparent to-slate-600"></div>
-                <svg className="w-6 h-6 text-slate-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                <ScanEye className="w-6 h-6 text-slate-500 animate-bounce" />
                 <div className="w-px h-8 bg-gradient-to-t from-transparent to-slate-600"></div>
               </div>
 
@@ -168,19 +282,49 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+
+        {/* Testimonials */}
+        <div className="w-full max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Trusted by leading creators</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: "Alex Mercer", role: "Sports Broadcaster", quote: "GuardSport has single-handedly recovered over $10k in ad revenue for us this month alone by taking down unauthorized streams." },
+              { name: "Sarah Jenkins", role: "MMA Content Creator", quote: "The perceptual hashing is like magic. People try to mirror or crop my fight breakdowns, and GuardSport flags them instantly." },
+              { name: "David Thorne", role: "League Manager", quote: "Sending DMCAs used to take my team hours every week. Now it's literally a one-click process from the dashboard." }
+            ].map((t, i) => (
+              <div key={i} className="p-8 rounded-2xl bg-slate-900/30 border border-slate-800/60 flex flex-col relative">
+                <div className="text-indigo-500/20 absolute top-4 left-4">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <p className="text-slate-300 mb-6 mt-4 relative z-10">"{t.quote}"</p>
+                <div className="mt-auto pt-6 border-t border-slate-800/50 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-300 font-bold">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-white font-medium text-sm">{t.name}</div>
+                    <div className="text-slate-500 text-xs">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-slate-800 bg-slate-950/50 mt-20 relative z-10">
+      <footer className="w-full border-t border-slate-800 bg-slate-950/50 relative z-10 mt-auto">
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center">
-              <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
+              <ShieldCheck className="w-3 h-3 text-white" />
             </div>
             <span className="font-bold text-slate-300 tracking-tight">GuardSport</span>
-            <span className="text-slate-600 text-sm ml-4">© {new Date().getFullYear()} All rights reserved.</span>
+            <span className="text-slate-600 text-sm ml-4">© {new Date().getFullYear()} All rights reserved. Built with ❤️</span>
           </div>
           <div className="flex gap-6 text-sm font-medium text-slate-400">
             <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>

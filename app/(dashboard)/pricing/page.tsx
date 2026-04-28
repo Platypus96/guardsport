@@ -66,7 +66,7 @@ export default function PricingPage() {
             </li>
             <li className="flex items-center text-slate-300 text-sm">
               <svg className="w-5 h-5 text-indigo-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-              Automated DMCA workflows (Coming soon)
+              Priority DMCA workflows
             </li>
             <li className="flex items-center text-slate-300 text-sm">
               <svg className="w-5 h-5 text-indigo-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
@@ -74,8 +74,8 @@ export default function PricingPage() {
             </li>
           </ul>
           
-          <Button variant="primary" className="w-full justify-center py-3 shadow-lg shadow-indigo-500/25">
-            Upgrade to Pro
+          <Button variant="primary" disabled className="w-full justify-center py-3 opacity-70 cursor-not-allowed">
+            Coming Soon
           </Button>
         </div>
       </div>
