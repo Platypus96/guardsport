@@ -647,5 +647,3 @@ RESEND_API_KEY=re_your-resend-key
 This is a solo-built project. If you find a bug or want to contribute a feature, please open an issue or PR.
 
 ---
-
-*Built by a solo developer as a full-stack prototype, progressing from zero to a 7-phase production-ready platform.*
