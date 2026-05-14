@@ -72,7 +72,7 @@ export default function LoginPage() {
           </Link>
 
           <div>
-            <h2 className="text-3xl font-bold text-white tracking-tight">Welcome back</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Welcome back</h2>
             <p className="mt-2 text-sm text-slate-400">Sign in to your account to manage your assets.</p>
           </div>
 

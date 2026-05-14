@@ -11,7 +11,7 @@ export default function LandingPage() {
 
       {/* Sticky Navbar */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center backdrop-blur-md bg-slate-950/80 border-b border-white/5 transition-all duration-300">
-        <nav className="w-full max-w-7xl px-6 py-4 flex items-center justify-between">
+        <nav className="w-full max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
               <ShieldCheck className="w-4.5 h-4.5 text-white" />
@@ -44,11 +44,11 @@ export default function LandingPage() {
             Protecting Next-Gen Sports Media
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 tracking-tight max-w-4xl mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 tracking-tight max-w-4xl mb-6 px-4">
             Defend your sports assets from digital piracy.
           </h1>
           
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed px-4">
             GuardSport automates the detection of illegal streams and unauthorized uploads across the web. Secure your revenue and protect your broadcasting rights in real-time.
           </p>
 
@@ -65,14 +65,14 @@ export default function LandingPage() {
 
 
         {/* Animated Stats Row */}
-        <div className="w-full max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-32">
+        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-32 px-4">
           {[
             { label: 'Violations Detected', value: 45281, suffix: '+' },
             { label: 'Takedowns Sent', value: 12940, suffix: '+' },
             { label: 'Accuracy Rate', value: 98, suffix: '.9%' },
             { label: 'Platforms Monitored', value: 50, suffix: '+' }
           ].map((stat, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-md text-center flex flex-col justify-center transition-transform hover:-translate-y-1 hover:bg-slate-800/50 duration-300">
+            <div key={i} className="p-5 sm:p-6 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-md text-center flex flex-col justify-center transition-transform hover:-translate-y-1 hover:bg-slate-800/50 duration-300">
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               <div className="text-sm font-medium text-slate-400 uppercase tracking-wide">{stat.label}</div>
             </div>
@@ -81,9 +81,9 @@ export default function LandingPage() {
 
         {/* How it Works Stepper */}
         <div className="w-full max-w-5xl mx-auto mb-32">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">How GuardSport Works</h2>
-            <p className="text-slate-400 text-lg">Three simple steps to secure your content across the web.</p>
+            <p className="text-slate-400 text-base sm:text-lg">Three simple steps to secure your content across the web.</p>
           </div>
           
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative">
@@ -117,12 +117,12 @@ export default function LandingPage() {
 
         {/* Feature Grid */}
         <div className="w-full max-w-6xl mx-auto mb-32">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">Everything you need to fight piracy.</h2>
-            <p className="text-slate-400 text-lg">An end-to-end intelligence engine built specifically for video creators.</p>
+            <p className="text-slate-400 text-base sm:text-lg">An end-to-end intelligence engine built specifically for video creators.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
             {[
               { title: 'Automated Discovery', desc: 'Our AI generates smart search queries to find hidden streams and re-uploads that evade simple title searches.', icon: Search, color: 'indigo' },
               { title: 'Perceptual Fingerprinting', desc: 'Identifies pirated videos even if they are re-encoded, cropped, or color-altered. Your video never leaves your browser.', icon: ScanEye, color: 'emerald' },
@@ -143,18 +143,18 @@ export default function LandingPage() {
         </div>
 
         {/* pHash Explanation Section */}
-        <div className="w-full max-w-6xl mx-auto p-10 md:p-14 rounded-[2rem] bg-gradient-to-br from-indigo-900/30 to-slate-900 border border-indigo-500/20 shadow-2xl shadow-indigo-900/20 text-left overflow-hidden relative mb-32">
+        <div className="w-full max-w-6xl mx-auto p-6 sm:p-10 md:p-14 rounded-[2rem] bg-gradient-to-br from-indigo-900/30 to-slate-900 border border-indigo-500/20 shadow-2xl shadow-indigo-900/20 text-left overflow-hidden relative mb-32">
           {/* Decor */}
           <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-indigo-500/20 blur-[80px] rounded-full pointer-events-none" />
           
-          <div className="flex flex-col md:flex-row gap-12 items-center relative z-10">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center relative z-10">
             <div className="flex-1 space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 shadow-sm">
                 <CheckCircle2 className="w-4 h-4" />
                 Privacy-First Fingerprinting
               </div>
-              <h2 className="text-4xl font-extrabold text-white tracking-tight">How we catch altered pirated copies.</h2>
-              <p className="text-lg text-slate-300 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">How we catch altered pirated copies.</h2>
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
                 Pirates try to hide by lowering quality, cropping edges, or changing colors. GuardSport catches them anyway using <strong className="text-white">Perceptual Hashing (pHash)</strong> — the same core tech behind YouTube Content ID.
               </p>
               <div className="p-5 rounded-xl bg-slate-950/50 border border-slate-800 text-slate-400 text-sm leading-relaxed">
@@ -201,9 +201,9 @@ export default function LandingPage() {
         </div>
 
         {/* Testimonials */}
-        <div className="w-full max-w-6xl mx-auto mb-20">
+        <div className="w-full max-w-6xl mx-auto mb-20 px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Trusted by leading creators</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">Trusted by leading creators</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -235,15 +235,17 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="w-full border-t border-slate-800 bg-slate-950/50 relative z-10 mt-auto">
-        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center">
-              <ShieldCheck className="w-3 h-3 text-white" />
+        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center">
+                <ShieldCheck className="w-3 h-3 text-white" />
+              </div>
+              <span className="font-bold text-slate-300 tracking-tight">GuardSport</span>
             </div>
-            <span className="font-bold text-slate-300 tracking-tight">GuardSport</span>
-            <span className="text-slate-600 text-sm ml-4">© {new Date().getFullYear()} All rights reserved. Built with ❤️</span>
+            <span className="text-slate-600 text-sm sm:ml-4">© {new Date().getFullYear()} All rights reserved. Built with ❤️</span>
           </div>
-          <div className="flex gap-6 text-sm font-medium text-slate-400">
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-400">
             <a href="https://github.com/Platypus96" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
